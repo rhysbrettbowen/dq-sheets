@@ -1,5 +1,5 @@
-var quicknessLabel = "Quickness";
-var xpLabel = "XP";
+var quicknessLabel = "Quickness:";
+var xpLabel = "XP:";
 
 var Malty = {
   name: "Malty",

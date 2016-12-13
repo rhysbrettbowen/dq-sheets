@@ -1,5 +1,5 @@
-var quicknessLabel = "Greed";
-var xpLabel = "EP";
+var quicknessLabel = "Greed:";
+var xpLabel = "EP:";
 
 var John = {
   name: "John Bellow",

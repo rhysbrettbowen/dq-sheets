@@ -1,5 +1,5 @@
-var quicknesslabel = "Omnipotence";
-var xplabel = "DP";
+var quicknessLabel = "Omnipotence:";
+var xpLabel = "DP:";
 
 var Ermagerd = {
   name: "Ermagerd The Unicorn",

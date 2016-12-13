@@ -1,5 +1,5 @@
-var quicknessLabel = "Self Worth";
-var xpLabel = "XP";
+var quicknessLabel = "Self Worth:";
+var xpLabel = "XP:";
 
 var Annoying = {
   name: "Annoying Sidekick",
@@ -90,11 +90,11 @@ var stackable = [
     }
   },
   {
-    name: "Bracelet of Bouncer Ability",
+    name: "Cape of Mighty Biceps",
     cost: 100,
     desc: "+1 Maximum HP (once per quest)",
     use: function() {
-      $("maxhp").val(+$("maxhp").val() + 1);
+      $("#maxhp").val(+$("#maxhp").val() + 1);
     }
   }
 ];

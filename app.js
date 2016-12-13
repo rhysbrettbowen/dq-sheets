@@ -26,10 +26,13 @@ var setup = function() {
 };
 
 var renderStackableItem = function(item) {
-  return "<li><input type='number' value='0' style='display:inline-block;width:40px;'> x <b>" + item.name + "</b>: " + item.desc
-    + "<button item=\"" + item.name + "\" action=\"buy\">Buy $" + item.cost + "</button>"
-    + "<button item=\"" + item.name + "\" action=\"sell\">Sell $" + toDollars(item.cost / 2) + "</button>"
-    + "<button item=\"" + item.name + "\" action=\"use\">Use</button></li>";
+  return "<li class='pure-g'><span class='pure-u-1-3'><input type='number' value='0' style='display:inline-block;width:40px;'> x <b>" + item.name + "</b>:</span>"
+    + "<span class='pure-u-1-3'>" + item.desc + "</span>"
+    + "<span class='pure-u-1-3'>"
+    + "<button item=\"" + item.name + "\" action=\"use\" class='pure-button pure-button-primary button-xsmall'>Use</button>"
+    + "<button item=\"" + item.name + "\" action=\"buy\" class='pure-button button-xsmall'>Buy $" + item.cost + "</button>"
+    + "<button item=\"" + item.name + "\" action=\"sell\" class='pure-button button-xsmall'>Sell $" + toDollars(item.cost / 2) + "</button>"
+    + "</span></li>";
 };
 
 var setItems = function(set) {
@@ -41,13 +44,14 @@ var setItems = function(set) {
 };
 
 var itemHtml = function(item) {
-  var html = "<li><label><b>" + item.name + "</b>: " + item.desc + " &nbsp;&nbsp;";
+  var html = "<li class='pure-g'><b class='pure-u-1-3'>" + item.name + ":</b>"
+    + "<span class='pure-u-1-3'>" + item.desc + "</span><span class='pure-u-1-3'>";
   if (currentItems.indexOf(item.name) == -1) {
-    html += "<button item=\"" + item.name + "\" action=\"buy\">Buy $" + item.cost + "</button>";
+    html += "<button item=\"" + item.name + "\" action=\"buy\" class='pure-button pure-button-primary'>Buy $" + item.cost + "</button>";
   } else {
-    html += "<button item=\"" + item.name + "\" action=\"sell\">Sell $" + toDollars(item.cost / 2) + "</button>";
+    html += "<button item=\"" + item.name + "\" action=\"sell\" class='pure-button pure-button-primary'>Sell $" + toDollars(item.cost / 2) + "</button>";
   }
-  html += "</label></li>";
+  html += "</span></li>";
   return html;
 };
 
@@ -90,20 +94,21 @@ $("#stackable").click(function(e) {
     return;
   }
   var item = findStackable(target.attr("item"));
+  var input = target.parent().parent().find("input");
   if (target.attr("action") == "buy") {
-    target.siblings("input").val(+target.siblings("input").val() + 1);
+    input.val(+input.val() + 1);
     setCoins(+$("#coins").val() - item.cost);
     if (item.buy) {
       item.buy();
     }
   } else if (target.attr("action") == "sell") {
-    target.siblings("input").val(+target.siblings("input").val() - 1);
+    input.val(+input.val() - 1);
     setCoins(+$("#coins").val() + item.cost / 2);
     if (item.sell) {
       item.sell();
     }
   } else {
-    target.siblings("input").val(+target.siblings("input").val() - 1);
+    input.val(+input.val() - 1);
     if (item.use) {
       item.use();
     }
@@ -139,6 +144,6 @@ var setCoins = function(num) {
   $("#coins").val(toDollars(num));
 };
 
-$("#xplabel").html(xplabel);
-$("#quicknesslabel").html(quicknesslabel);
+$("#xplabel").html(xpLabel);
+$("#quicknesslabel").html(quicknessLabel);
 setup();
