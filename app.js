@@ -27,7 +27,7 @@ var setup = function() {
 };
 
 var renderStackableItem = function(item) {
-  return "<li class='pure-g'><span class='pure-u-1-3'><input type='number' value='0' style='display:inline-block;width:40px;'> x <b>" + item.name + "</b>:</span>"
+  return "<li class='pure-g'><span class='pure-u-1-3'><input type='number' value='0' min='0' style='display:inline-block;width:40px;'> x <b>" + item.name + "</b>:</span>"
     + "<span class='pure-u-1-3'>" + item.desc + "</span>"
     + "<span class='pure-u-1-3'>"
     + "<button item=\"" + item.name + "\" action=\"use\" class='pure-button pure-button-primary button-xsmall'>Use</button>"
@@ -96,20 +96,27 @@ $("#stackable").click(function(e) {
   }
   var item = findStackable(target.attr("item"));
   var input = target.parent().parent().find("input");
+  var num = +input.val();
   if (target.attr("action") == "buy") {
-    input.val(+input.val() + 1);
+    input.val(num + 1);
     setCoins(+$("#coins").val() - item.cost);
     if (item.buy) {
       item.buy();
     }
   } else if (target.attr("action") == "sell") {
-    input.val(+input.val() - 1);
+    if (num <= 0) {
+      return;
+    }
+    input.val(num - 1);
     setCoins(+$("#coins").val() + item.cost / 2);
     if (item.sell) {
       item.sell();
     }
   } else {
-    input.val(+input.val() - 1);
+    if (num <= 0) {
+      return;
+    }
+    input.val(num - 1);
     if (item.use) {
       item.use();
     }
