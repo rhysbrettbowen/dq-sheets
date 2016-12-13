@@ -102,18 +102,12 @@ $("#stackable").click(function(e) {
       item.buy();
     }
   } else if (target.attr("action") == "sell") {
-    if (num <= 0) {
-      return;
-    }
     input.val(num - 1);
     setCoins(+$("#coins").val() + item.cost / 2);
     if (item.sell) {
       item.sell();
     }
   } else {
-    if (num <= 0) {
-      return;
-    }
     input.val(num - 1);
     if (item.use) {
       item.use();
