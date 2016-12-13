@@ -22,6 +22,10 @@
       padding: 5px;
       margin: 0 20px 20px 20px;
     }
+    .pure-form input[type=number]:invalid,
+    .pure-form input:invalid {
+      border: 1px solid red;
+    }
   </style>
 </head>
 <body>
@@ -39,19 +43,19 @@
         <label for="maxhp">
           Maximum HP:
         </label>
-        <input id="maxhp" type="number"/>
+        <input id="maxhp" type="number" min="0"/>
       </div>
       <div class="pure-control-group">
         <label for="currenthp">
           Current HP: 
         </label>
-        <input id="currenthp" type="number"/>
+        <input id="currenthp" type="number" min="0"/>
       </div>
       <div class="pure-control-group">
         <label for="attack">
           Attack: 
         </label>
-        <input id="attack" />
+        <input id="attack" type="text" pattern="^D[468](\s?[+\-]\s?[1-9][0-9]*)?$"/>
       </div>
       <div class="pure-control-group">
         <label for="defense">
@@ -62,38 +66,38 @@
       <div class="pure-control-group">
         <label for="xp" id="xplabel">
         </label>
-        <input id="xp" type="number"/>
+        <input id="xp" type="number" min="0"/>
       </div>
       <div class="pure-control-group">
         <label for="coins">
           Coins: 
         </label>
-        <input id="coins" type="number" step="0.50"/>
+        <input id="coins" type="number" step="0.50" min="0"/>
       </div>
       <div>
         <h3>Saving Throws:</h3>
         <div class="pure-control-group">
           <label for="quickness" id="quicknesslabel">
           </label>
-          <input id="quickness" type="number"/>
+          <input id="quickness" type="number" min="0"/>
         </div>
         <div class="pure-control-group">
           <label for="sexual">
             Sexual Prowess: 
           </label>
-          <input id="sexual" type="number"/>
+          <input id="sexual" type="number" min="0"/>
         </div>
         <div class="pure-control-group">
           <label for="tolerance">
             Tolerance: 
           </label>
-          <input id="tolerance" type="number"/>
+          <input id="tolerance" type="number" min="0"/>
         </div>
         <div class="pure-control-group">
           <label for="smarts">
             Smarts: 
           </label>
-          <input id="smarts" type="number"/>
+          <input id="smarts" type="number" min="0"/>
         </div>
       </div>
     </form>
