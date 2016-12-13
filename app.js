@@ -17,6 +17,9 @@ var setCharacter = function(char) {
   $("#xp").val(0);
   setCoins(0);
   setItems(char.items);
+  $("#stackable").html(stackable.map(renderStackableItem).join(""));
+  validateItems();
+  validateStackable();
 };
 
 var setup = function() {
@@ -44,6 +47,7 @@ var setItems = function(set) {
     return !item.user || currentCharacter == item.user;
   });
   $("#items").html(store.map(itemHtml).join(""));
+  validateItems();
 };
 
 var itemHtml = function(item) {
