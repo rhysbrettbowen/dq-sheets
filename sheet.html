@@ -1,6 +1,8 @@
 <head>
   <script src="jquery.js"></script>
-  <script src="dataiii.js"></script>
+  <script>
+    document.write('<script src="data' + document.location.search.substring(1) + '.js"></scr'+'ipt>');
+  </script>
 </head>
 <body>
   <div id="dq">
@@ -14,10 +16,10 @@
     <div>
       <h3>Character Stats:</h3>
       <label>
-        Maximum HP: <input id="maxhp" />
+        Maximum HP: <input id="maxhp" type="number"/>
       </label>
       <label>
-        Current HP: <input id="currenthp" />
+        Current HP: <input id="currenthp" type="number"/>
       </label>
     </div>
     <div>
@@ -25,45 +27,43 @@
         Attack: <input id="attack" />
       </label>
       <label>
-        Defense: <input id="defense" />
+        Defense: <input id="defense" type="number"/>
       </label>
     </div>
     <div>
       <label>
-        DP: <input id="xp" />
+        <span id="xplabel">XP</span>: <input id="xp" type="number"/>
       </label>
       <label>
-        Coins: <input id="coins" />
+        Coins: <input id="coins" type="number"/>
       </label>
     </div>
     <div>
       <h3>Saving Throws:</h3>
       <div>
         <label>
-          <span>Omnipotence</span>: <input id="quickness" />
+          <span id="quicknesslabel">Quickness</span>: <input id="quickness" type="number"/>
         </label>
       </div>
       <div>
         <label>
-          Sexual Prowess: <input id="sexual" />
+          Sexual Prowess: <input id="sexual" type="number"/>
         </label>
       </div>
       <div>
         <label>
-          Tolerance: <input id="tolerance" />
+          Tolerance: <input id="tolerance" type="number"/>
         </label>
       </div>
       <div>
         <label>
-          Smarts: <input id="smarts" />
+          Smarts: <input id="smarts" type="number"/>
         </label>
       </div>
     </div>
     <h2>Items:</h2>
-    <label>
-      Below Ales: <input id="ales"/>
-    </label>
-    <ul id="items"></ul>
+    <ul id="stackable" style="margin: 0"></ul>
+    <ul id="items" style="margin: 0"></ul>
   </div>
   <div>
     <h3>Other:</h3>

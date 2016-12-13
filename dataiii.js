@@ -1,7 +1,9 @@
+var quicknesslabel = "Omnipotence";
+var xplabel = "DP";
+
 var Ermagerd = {
   name: "Ermagerd The Unicorn",
   hp: 7,
-  attack: "D4 + 1",
   defense: 0,
   quickness: 14,
   tolerance: 14,
@@ -13,7 +15,6 @@ var Ermagerd = {
 var Halthor = {
   name: "Halthor: God of Fists",
   hp: 10,
-  attack: "D6",
   defense: 0,
   quickness: 10,
   tolerance: 10,
@@ -25,7 +26,6 @@ var Halthor = {
 var Norod = {
   name: "Norod The All Knowing",
   hp: 9,
-  attack: "D6 - 1",
   defense: 0,
   quickness: 12,
   tolerance: 10,
@@ -37,7 +37,6 @@ var Norod = {
 var Chuglox = {
   name: "Chuglox (Godly)",
   hp: 8,
-  attack: "D6 + 1",
   defense: 0,
   quickness: 6,
   tolerance: 6,
@@ -64,6 +63,17 @@ var incDefence = function() {
 var decDefence = function() {
   $("#defense").val(+$("#defense").val() - 1);
 };
+
+var stackable = [
+  {
+    name: "Bellow Ales",
+    cost: 50,
+    desc: "Use at death to restore D6 of HP",
+    use: function() {
+      $("#currenthp").val(Math.floor(Math.random() * 6) + 1);
+    }
+  }
+];
 
 var items = [
   {

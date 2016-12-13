@@ -1,52 +1,52 @@
-var quicknessLabel = "Quickness";
+var quicknessLabel = "Self Worth";
 var xpLabel = "XP";
 
-var Malty = {
-  name: "Malty",
-  hp: 7,
+var Annoying = {
+  name: "Annoying Sidekick",
+  hp: 6,
   defense: 0,
-  quickness: 14,
-  tolerance: 14,
-  sexual: 14,
-  smarts: 14,
-  items: ["Shoddy Shiv"]
+  quickness: 6,
+  tolerance: 15,
+  sexual: 9,
+  smarts: 8,
+  items: ["Basket of Lemons"]
 };
 
 var Bartlebut = {
   name: "Bartlebut",
-  hp: 10,
+  hp: 9,
   defense: 0,
-  quickness: 7,
-  tolerance: 7,
-  sexual: 7,
+  quickness: 12,
+  tolerance: 9,
+  sexual: 10,
   smarts: 7,
-  items: ["Flacid Axe"]
+  items: ["Pantsless Hatchet"]
 };
 
 var Daiquirin = {
   name: "Daiquirin",
-  hp: 8,
+  hp: 7,
   defense: 0,
-  quickness: 12,
-  tolerance: 12,
+  quickness: 14,
+  tolerance: 14,
   sexual: 12,
   smarts: 12,
-  items: ["Withered Staff"]
+  items: ["Hoppy Staff"]
 };
 
 var Chuglox = {
   name: "Chuglox",
-  hp: 9,
+  hp: 8,
   defense: 0,
-  quickness: 10,
+  quickness: 9,
   tolerance: 10,
-  sexual: 14,
-  smarts: 10,
-  items: ["Sword of Sobriety"]
+  sexual: 15,
+  smarts: 9,
+  items: ["Blowhard Sword"]
 };
 
 var characters = [
-  Malty,
+  Annoying,
   Chuglox,
   Daiquirin,
   Bartlebut
@@ -72,117 +72,134 @@ var stackable = [
     use: function() {
       $("#currenthp").val(Math.floor(Math.random() * 6) + 1);
     }
+  },
+  {
+    name: "Bracelet of Bouncer Ability",
+    cost: 100,
+    desc: "+1 to all Saving Throws (once per quest)",
+    use: function() {
+      var savingThrows = [
+        "#quickness",
+        "#sexual",
+        "#tolerance",
+        "#smarts",
+      ];
+      for (var i = 0; i < savingThrows.length; i++) {
+        $(savingThrows[i]).val(+$(savingThrows[i]).val() + 1);
+      }
+    }
+  },
+  {
+    name: "Bracelet of Bouncer Ability",
+    cost: 100,
+    desc: "+1 Maximum HP (once per quest)",
+    use: function() {
+      $("maxhp").val(+$("maxhp").val() + 1);
+    }
   }
 ];
 
 var items = [
   {
-    name: "Shoddy Shiv",
-    cost: 40,
+    name: "Basket of Lemons",
+    cost: 70,
     desc: "D4 + 1",
     user: characters[0],
     buy: setAttack
   },
   {
-    name: "Draught Daggers",
-    cost: 100,
-    desc: "D6",
-    user: characters[0],
-    buy: setAttack
-  },
-  {
-    name: "Killing Knives",
-    cost: 225,
-    desc: "D6 + 1",
-    user: characters[0],
-    buy: setAttack
-  },
-  {
-    name: "Sword of Sobriety",
-    cost: 50,
-    desc: "D6",
-    user: characters[1],
-    buy: setAttack
-  },
-  {
-    name: "Sloppy Scimitar",
+    name: "Sack of Grapefruit",
     cost: 110,
+    desc: "D8 - 1",
+    user: characters[0],
+    buy: setAttack
+  },
+  {
+    name: "Fanny Pack of Avocados",
+    cost: 175,
+    desc: "D8",
+    user: characters[0],
+    buy: setAttack
+  },
+  {
+    name: "Blowhard Sword",
+    cost: 60,
+    desc: "D6",
+    user: characters[1],
+    buy: setAttack
+  },
+  {
+    name: "Bromance Sword",
+    cost: 160,
     desc: "D6 + 1",
     user: characters[1],
     buy: setAttack
   },
   {
-    name: "Bottle Opener Sword",
-    cost: 260,
+    name: "Stein Slayer",
+    cost: 220,
     desc: "D6 + 2",
     user: characters[1],
     buy: setAttack
   },
   {
-    name: "Withered Staff",
-    cost: 30,
+    name: "Hoppy Staff",
+    cost: 60,
     desc: "D4",
     user: characters[2],
     buy: setAttack
   },
   {
-    name: "Girly Drink Staff",
-    cost: 80,
-    desc: "D4 + 1",
+    name: "Aged Staff",
+    cost: 100,
+    desc: "D6",
     user: characters[2],
     buy: setAttack
   },
   {
-    name: "Molotov Wand",
-    cost: 200,
-    desc: "D4 + 2",
+    name: "Rod of Enemy Drink Spilling",
+    cost: 160,
+    desc: "D8",
     user: characters[2],
     buy: setAttack
   },
   {
-    name: "Flacid Axe",
-    cost: 60,
+    name: "Pantsless Hatchet",
+    cost: 50,
     desc: "D6",
     user: characters[3],
     buy: setAttack
   },
   {
-    name: "Bacchus Axe",
-    cost: 180,
+    name: "Queasy Axe",
+    cost: 150,
     desc: "D8",
     user: characters[3],
     buy: setAttack
   },
   {
-    name: "Keg Destroyer",
-    cost: 380,
+    name: "Foam Chopper",
+    cost: 250,
     desc: "D8 + 1",
     user: characters[3],
     buy: setAttack
   },
   {
-    name: "Battle Britches",
+    name: "Keg Mail",
     cost: 75,
     desc: "Defence +1",
     buy: incDefence,
     sell: decDefence
   },
   {
-    name: "Helmet of Hangover Resistance",
+    name: "Sobering Gauntlets",
     cost: 75,
     desc: "Defence +1",
     buy: incDefence,
     sell: decDefence
   },
   {
-    name: "Belt of 100 Crunches",
-    cost: 75,
-    desc: "Defence +1",
-    buy: incDefence,
-    sell: decDefence
-  },
-  {
-    name: "Bracelet of Bouncer Ability",
+    name: "Helmet of Heaving",
     cost: 75,
     desc: "Defence +1",
     buy: incDefence,

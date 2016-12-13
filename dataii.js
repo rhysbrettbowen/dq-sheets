@@ -1,7 +1,9 @@
+var quicknessLabel = "Greed";
+var xpLabel = "EP";
+
 var John = {
   name: "John Bellow",
   hp: 8,
-  attack: "D4",
   defense: 0,
   quickness: 14,
   tolerance: 14,
@@ -13,7 +15,6 @@ var John = {
 var Hilda = {
   name: "Hilda Muckraker",
   hp: 7,
-  attack: "D4 + 1",
   defense: 0,
   quickness: 12,
   tolerance: 9,
@@ -25,7 +26,6 @@ var Hilda = {
 var Yeddy = {
   name: "Yeddy Vedder",
   hp: 9,
-  attack: "D6",
   defense: 0,
   quickness: 11,
   tolerance: 14,
@@ -37,7 +37,6 @@ var Yeddy = {
 var Chuglox = {
   name: "Chuglox (Stout)",
   hp: 7,
-  attack: "D8 - 1",
   defense: 0,
   quickness: 7,
   tolerance: 14,
@@ -64,6 +63,17 @@ var incDefence = function() {
 var decDefence = function() {
   $("#defense").val(+$("#defense").val() - 1);
 };
+
+var stackable = [
+  {
+    name: "Bellow Ales",
+    cost: 50,
+    desc: "Use at death to restore D6 of HP",
+    use: function() {
+      $("#currenthp").val(Math.floor(Math.random() * 6) + 1);
+    }
+  }
+];
 
 var items = [
   {
