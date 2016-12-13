@@ -23,6 +23,7 @@ var setup = function() {
   setCharacter(characters[0]);
   $("#stackable").html(stackable.map(renderStackableItem).join(""));
   $("#character").html(characters.map(createCharacterOption).join(""));
+  validateItems();
 };
 
 var renderStackableItem = function(item) {
@@ -30,7 +31,7 @@ var renderStackableItem = function(item) {
     + "<span class='pure-u-1-3'>" + item.desc + "</span>"
     + "<span class='pure-u-1-3'>"
     + "<button item=\"" + item.name + "\" action=\"use\" class='pure-button pure-button-primary button-xsmall'>Use</button>"
-    + "<button item=\"" + item.name + "\" action=\"buy\" class='pure-button button-xsmall'>Buy $" + item.cost + "</button>"
+    + "<button item=\"" + item.name + "\" action=\"buy\" coins='" + item.cost + "' class='pure-button button-xsmall'>Buy $" + item.cost + "</button>"
     + "<button item=\"" + item.name + "\" action=\"sell\" class='pure-button button-xsmall'>Sell $" + toDollars(item.cost / 2) + "</button>"
     + "</span></li>";
 };
@@ -47,7 +48,7 @@ var itemHtml = function(item) {
   var html = "<li class='pure-g'><b class='pure-u-1-3'>" + item.name + ":</b>"
     + "<span class='pure-u-1-3'>" + item.desc + "</span><span class='pure-u-1-3'>";
   if (currentItems.indexOf(item.name) == -1) {
-    html += "<button item=\"" + item.name + "\" action=\"buy\" class='pure-button pure-button-primary'>Buy $" + item.cost + "</button>";
+    html += "<button item=\"" + item.name + "\" action=\"buy\" coins='" + item.cost + "' class='pure-button pure-button-primary'>Buy $" + item.cost + "</button>";
   } else {
     html += "<button item=\"" + item.name + "\" action=\"sell\" class='pure-button pure-button-primary'>Sell $" + toDollars(item.cost / 2) + "</button>";
   }
@@ -142,8 +143,17 @@ var toDollars = function(num) {
 
 var setCoins = function(num) {
   $("#coins").val(toDollars(num));
+  validateItems();
+};
+
+var validateItems = function() {
+  var coins = +$("#coins").val();
+  $("[coins]").each(function(i, el) {
+    $(el).toggleClass("pure-button-disabled", +$(el).attr("coins") > coins);
+  });
 };
 
 $("#xplabel").html(xpLabel);
 $("#quicknesslabel").html(quicknessLabel);
+$("#coins").change(validateItems);
 setup();
