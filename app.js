@@ -24,6 +24,8 @@ var setup = function() {
   $("#stackable").html(stackable.map(renderStackableItem).join(""));
   $("#character").html(characters.map(createCharacterOption).join(""));
   validateItems();
+  validateStackable();
+  $("#stackable input").change(validateStackable);
 };
 
 var renderStackableItem = function(item) {
@@ -63,10 +65,6 @@ var addItem = function(item) {
 var removeItem = function(item) {
   currentItems.splice(currentItems.indexOf(item), 1);
   setItems(currentItems);
-};
-
-var removeStackable = function(item) {
-  currentStackable[item.name] = currentStackable[item.name] - 1;
 };
 
 var findItem = function(name) {
@@ -121,6 +119,7 @@ $("#stackable").click(function(e) {
       item.use();
     }
   }
+  validateStackable();
 });
 
 $("#items").click(function(e) {
@@ -157,6 +156,15 @@ var validateItems = function() {
   var coins = +$("#coins").val();
   $("[coins]").each(function(i, el) {
     $(el).toggleClass("pure-button-disabled", +$(el).attr("coins") > coins);
+  });
+};
+
+var validateStackable = function() {
+  $("#stackable input").each(function(i, el) {
+    $(el).parent().parent().find("[action=use]")
+      .toggleClass("pure-button-disabled", +$(el).val() <= 0);
+    $(el).parent().parent().find("[action=sell]")
+      .toggleClass("pure-button-disabled", +$(el).val() <= 0);
   });
 };
 
